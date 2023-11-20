@@ -8,7 +8,11 @@ import TheWelcome from './components/TheWelcome.vue'
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="前端組件展示" >
+        <template #content>
+            此網站展示開發經驗中較常運用到的前端組件，這些組件已經經過整合，並提供一個彈性的介面操作，讓使用者可以更快速開發功能類似且不同UI呈現的組件
+        </template>  
+      </HelloWorld>
     </div>
   </header>
 

@@ -1,28 +1,25 @@
 
 import {ref} from "vue";
-import type {IStore}  from "./interface/IStore";
+
 import type { IAPIRegister } from "./interface/IAPIRegister";
 
-const APIRegisterPool : any = ref({}) ;
 
-export function useAPIRegister<T>(controllerName : string ) : IAPIRegister
+
+export function useAPIRegister<T>() : IAPIRegister<T>
 {
+	const APIRegisterPool = ref() ;
 
-
-
-	function registerAPI<T extends {}>(action : T) : void
+	function registerAPI(action : T) : void
 	{
-		APIRegisterPool.value[controllerName] = action;
+		APIRegisterPool.value = action;
 	}
-	function getControllerAction<T extends {}>(controllerName : string) : T
+	function execuateAPI() : T
 	{
-		return APIRegisterPool.value[controllerName];
+		return APIRegisterPool.value;
 	}
-	const a =ref(1);
 	return {
-		a,
 		registerAPI,
-		getControllerAction
+		execuateAPI
 	}
 
 }

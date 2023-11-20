@@ -1,6 +1,6 @@
-export interface IAPIRegister {
+export interface IAPIRegister<T> {
     [prop: string]: unknown;
-    getControllerAction<T extends {}>(name : string ) : T;
-    registerAPI<T extends {}>(action : T) : void;
+    execuateAPI() : T;
+    registerAPI(action : T) : void;
     
 }
