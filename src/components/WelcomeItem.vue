@@ -1,12 +1,24 @@
+<script setup lang="ts">
+  import {defineProps} from "vue";
+  const props = defineProps(["route"])
+  console.log(props);
+</script>
+
 <template>
-  <div class="item">
-    <i>
+  <div class="item d-flex">
+    <div class>
+      <i>
       <slot name="icon"></slot>
     </i>
+    </div>
+
     <div class="details">
-      <h3>
+      <router-link :to="props.route ?? '/'">
+        <h3>
         <slot name="heading"></slot>
       </h3>
+      </router-link> 
+
       <slot></slot>
     </div>
   </div>
@@ -21,7 +33,7 @@
 
 .details {
   flex: 1;
-  margin-left: 1rem;
+  margin-left:40px;
 }
 
 i {
@@ -38,7 +50,7 @@ h3 {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
-  color: var(--color-heading);
+  color: rgb(58, 197, 3);
 }
 
 @media (min-width: 1024px) {

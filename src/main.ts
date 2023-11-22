@@ -1,13 +1,14 @@
-import './assets/main.css'
+// import './assets/main.css'
 
 
 import { createApp } from 'vue'
-import App from './App.vue'
+import Index from './Index.vue'
 import  "./test/apiTest";
 import { createRouter, createWebHistory } from 'vue-router'
 import {routes} from "./route";
 
-
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 
 
 if(import.meta.env.DEV)
@@ -16,5 +17,5 @@ if(import.meta.env.DEV)
         history: createWebHistory(),
         routes: routes
     })
-    createApp(App).use(router).mount('#app')
+    createApp(Index).use(router).mount('#app')
 }
