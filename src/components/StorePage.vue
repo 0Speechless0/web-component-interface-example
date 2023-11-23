@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+
+
 </script>
 <template>
     <div class="row ">
@@ -21,6 +23,9 @@
             </slot>
         </div>
         <hr />
+        <slot name="codeInjection">
+
+        </slot>
     </div>
 
 

@@ -1,6 +1,8 @@
-import { ref } from "vue";
+import { ref, computed, type Ref } from "vue";
 import {useAPIRegister } from "../APIRegister";
 import type {ISelectionAction }  from "../interface/IStoreAction/ISelectionAction";
+import type {ISelectionMiddleAction }  from "../interface/IStoreMiddleAction/ISelectionMiddleAction";
+import type { IOption } from "@/interface/IOption";
 function compare(a :any , b : any) {
     if ( parseInt(a.Value) <parseInt(b.Value) ) {
       return -1;
@@ -14,42 +16,36 @@ function compare(a :any , b : any) {
 
 
 
-const Map = ref({});
+// const Map = ref({});
 const APIRegister = useAPIRegister<ISelectionAction>();
 
 //選項功能模組 :
 
 
-export function useSelectionStore() {
+export function useSelectionStore() : ISelectionMiddleAction<ISelectionAction> {
 
     //for each item in List 
     //  Value : 選項值
     //  Text  : 選項顯示文字
 
-    const List = ref();
+    const List : Ref<Array<IOption> > = ref([]);
     const param = ref({});
     function setParameter(_param : {}) : void
     {
-      param.value = _param;
+      param.value  = _param;
       
     }
-
-    async function Get(prefix= "")
+    async function Get(prefix= "") : Promise<void>
     {
 
-        List.value = await APIRegister
-          .execuateAPI()
-          .Get(param.value);
+        List.value  =  await APIRegister
+          .execuateAPI("Get", param.value)
+        // Map.value =
+        // List.value.reduce((a : any, c : any)=>{ 
+        //     a[prefix+ c.Value] = c.Text
+        //     return a ;   
+        // }, {});
 
-        Map.value =
-        List.value.reduce((a : any, c : any)=>{ 
-            a[prefix+ c.Value] = c.Text
-            return a ;   
-        }, {});
-
-        List.value.sort(compare);
-        console.log(List.value);
-        return List
     }
 
     // async function GetSelection(route, prefix= "")
@@ -72,9 +68,8 @@ export function useSelectionStore() {
 
         //選項清單
         Get,
+        List,
         setParameter,
-        //選項文字字典
-        Map,
         APIRegister
     }
 

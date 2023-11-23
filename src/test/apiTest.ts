@@ -1,10 +1,12 @@
 import type { IOption } from "../interface/IOption";
 import { useSelectionStore } from "../store/SelectionStore";
-import {axiosInstance} from "./apiFrameworkTest";
+import {axiosInstance as clientInstance} from "./apiFrameworkTest";
 
 
 useSelectionStore().APIRegister.registerAPI({
-    Get: async function (params: {}): Promise<IOption[]> {
-        return (await axiosInstance.post("/Unit/GetList", params) ).data
+
+    Get: async (params: {}): Promise<IOption[]> => {
+
+        return (await clientInstance.post("Unit/GetUnitList", params) ).data 
     }
 })
