@@ -2,20 +2,23 @@
 import {ref, type Ref} from "vue";
 
 import type { IAPIRegister } from "./interface/IAPIRegister";
-import {axiosInstance as clientInstance} from "./apiFrameworkTest";
+import {axiosInstance as clientInstance} from "./test/apiFrameworkTest";
 
 
 export function useAPIRegister<T>() : IAPIRegister<T>
 {
-	const APIRegisterPool =ref() ;
 
-	function registerAPI(action : T) : void
+	const APIRegisterPool = ref();
+
+	APIRegisterPool.value = {};
+
+	function registerAPI<F>(actionEnum: F , action : (params : any )  => void  ) : void
 	{
-		APIRegisterPool.value = action;
+		APIRegisterPool.value[actionEnum] = action;
 	}
-	function execuateAPI(actionName : string, params : {}) : any
+	function execuateAPI<F>(actionEnum : F, params : {}) : any
 	{	
-		return APIRegisterPool.value[actionName](params, clientInstance);
+		return APIRegisterPool.value[actionEnum](params, clientInstance);
 	}
 
 	function getClientInstance()

@@ -56,14 +56,14 @@ const MONACO_EDITOR_OPTIONS = {
 			</template>
 			<template #codeInjection>
 				<div v-for="(f, index) in Object.entries(store.APIRegister.APIRegisterPool)" :key="index" >
-					<h4>{{ f[0] }} :{{ f[1].toString().slice(0, f[1].toString().indexOf('{'))  }}</h4>
+					<!-- <h4>{{ f[0] }} :{{ f[1].toString().slice(0, f[1].toString().indexOf('{'))  }}</h4>
 					<monacoEditor 
 	
 						:code="f[1].toString()" 
 						:inject="(c : Function ) =>{ store.APIRegister[f[0]] =  c }" >
 	
 					</monacoEditor>
-	
+	 -->
 				</div>
 	
 			</template>

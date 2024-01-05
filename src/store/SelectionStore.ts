@@ -1,6 +1,6 @@
 import { ref, computed, type Ref } from "vue";
 import {useAPIRegister } from "../APIRegister";
-import type {ISelectionAction }  from "../interface/IStoreAction/ISelectionAction";
+import  {SelectionAction }  from "../interface/StoreActionEnum/SelectionActionEnum";
 import type {ISelectionMiddleAction }  from "../interface/IStoreMiddleAction/ISelectionMiddleAction";
 import type { IOption } from "@/interface/IOption";
 function compare(a :any , b : any) {
@@ -17,12 +17,12 @@ function compare(a :any , b : any) {
 
 
 // const Map = ref({});
-const APIRegister = useAPIRegister<ISelectionAction>();
+const APIRegister = useAPIRegister<SelectionAction>();
 
 //選項功能模組 :
 
 
-export function useSelectionStore() : ISelectionMiddleAction<ISelectionAction> {
+export function useSelectionStore() : ISelectionMiddleAction<SelectionAction> {
 
     //for each item in List 
     //  Value : 選項值
@@ -39,7 +39,7 @@ export function useSelectionStore() : ISelectionMiddleAction<ISelectionAction> {
     {
 
         List.value  =  await APIRegister
-          .execuateAPI("Get", param.value)
+          .execuateAPI<SelectionAction>(SelectionAction.Get, param.value)
         // Map.value =
         // List.value.reduce((a : any, c : any)=>{ 
         //     a[prefix+ c.Value] = c.Text
